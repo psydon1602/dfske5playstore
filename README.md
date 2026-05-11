@@ -35,7 +35,7 @@ All apps you install later via the Play Store will automatically appear in the v
 4. Open the Phone app in the vehicle (make sure your smartphone is connected via Bluetooth).
 
 
-5. Enter the following code there: * **#12040416#***
+5. Enter the following code there: ```*#12040416#*```
 
 
 6. A list of all installed apps on the vehicle should now appear.
@@ -47,7 +47,7 @@ All apps you install later via the Play Store will automatically appear in the v
 8. Select the USB stick (usually labeled as “udisk”) and install the Panels.apk file by tapping on it.
 
 
-9. After installation, return to the Phone app and enter the same code again: * **#12040416#***
+9. After installation, return to the Phone app and enter the same code again: ```*#12040416#*```
 
 
 10. In the app list, launch Panels to configure it as you wish.
@@ -70,17 +70,17 @@ the ZIP archive) must be installed as a system application with the correct perm
 **Why is this necessary?**
 So that Google Play can reliably perform background updates of installed apps and handle new app
 installations.
-Since we need to move it into the **system/priv-app/** folder of the vehicle’s system, this must be done via
+Since we need to move it into the ```system/priv-app/``` folder of the vehicle’s system, this must be done via
 **ADB** .
 
 **We need:**
 
 - Installed **ADB Tools (Android Debug Bridge (ADB)** is used to establish a connection between a
-computer and an Android device in a development environment)
-**[https://dl.google.com/android/repository/platform-tools-latest-windows.zip](https://dl.google.com/android/repository/platform-tools-latest-windows.zip)**
+computer and an Android device in a development environment):<br>
+**[platform-tools-latest-windows.zip](https://dl.google.com/android/repository/platform-tools-latest-windows.zip)**
 
-- A set of APK files for Google Play – specific to the Android version in our car
-(already located in the same folder as this guide)
+- A set of APK files for Google Play – specific to the Android version in our car:<br>
+**[DFSK E5 Play Store APKs.zip](https://drive.google.com/file/d/1GP1lsc4lQn-JXJYnNZ2fC0uphFEIgtLD/view?usp=share_link)**
 
 - WLAN connection between the car and the computer
 
@@ -90,17 +90,18 @@ We will now go step by step
 _(If you already have ADB Tools installed on your computer and have used them before, you can skip to_
 _**Step 2**_ _)_
 
-Download the ADB ZIP file from the link above and extract its contents – preferably directly to the **C:**
+Download the ADB ZIP file from the link above and extract its contents – preferably directly to the ```C:```
 drive.
 The ZIP file contains a folder named platform-tools, so after extracting, the folder path should look like
-this: **C:\platform-tools**
+this:<br>
+```C:\platform-tools```
 
 Next, add the path of this folder to the system’s PATH variables.
 This allows you to access ADB from any folder using the Command Prompt (CMD), which will be useful
 later.
 
 **The fastest way to do this:**
-Press the key combination **Windows + R**, type **sysdm.cpl** in the input field, and click OK.
+Press the key combination **Windows + R**, type ```sysdm.cpl``` in the input field, and click OK.
 A window will appear. Click on the third tab **(Advanced)**, then at the bottom click on **Environment**
 **Variables** .
 
@@ -109,7 +110,7 @@ A new window will open. Select the option **“Path”** and click the **“Edit
 
 
 In the next window, click on **“Browse”** and select the folder where you extracted ADB. This should be
-located at the following path: **C:\platform-tools** .
+located at the following path: ```C:\platform-tools```.
 
 
 Now confirm each open window by clicking “OK”.
@@ -122,7 +123,7 @@ After that, I recommend restarting the computer so the PATH change takes effect.
 Download the ZIP file that contains the four required APK installation files for the Google Play Store and
 extract it into a new folder named “DFSK E5 Play Store” on your desktop.
 
-The path should then look something like this: **C:\Users\Your-Username\Desktop\DFSK E5 Play Store**
+The path should then look something like this: ```C:\Users\Your-Username\Desktop\DFSK E5 Play Store```
 
 
 Press the key combination **SHIFT + right-mouse-click** inside the folder and select the option **“Open**
@@ -134,13 +135,13 @@ The command prompt (CMD) should then open:
 Now it’s time to connect the car to your home Wi-Fi network and find the car’s IP address in your router’s
 settings.
 
-This IP address usually follows the format **192.168.xxx.xxx** (or something else, depending on the router).
+This IP address usually follows the format ```192.168.xxx.xxx``` (or something else, depending on the router).
 Remember this address, as we’ll need it shortly to connect the computer to the car via ADB.
 
 First, let’s test whether ADB was successfully added to the PATH variables.
 
 Enter the following command in the command prompt (CMD):
-adb version
+```adb version```
 
 If the output looks something like this:
 
@@ -151,14 +152,14 @@ In that case, check whether the path to platform-tools was properly added to the
 
 Now we will connect to the car using its IP address.
 Enter the following command in the command prompt (CMD):
-adb connect IP-ADDRESS:5555
+```adb connect IP-ADDRESS:5555```
 
 **Example:**
-If your IP address is **192.168.30.20**, then the command would be:
-adb connect 192.168.30.20:5555
+If your IP address is ```192.168.30.20```, then the command would be:
+```adb connect 192.168.30.20:5555```
 
 If the connection is successful, the output should look something like this:
-connected to 192.168.30.20:5555
+```connected to 192.168.30.20:5555```
 
 If an error message appears, check the following:
 
@@ -168,7 +169,7 @@ If an error message appears, check the following:
 
 If the connection is successful, we proceed with the next command.
 Enter the following in the command prompt (CMD):
-adb root
+```adb root```
 
 This command starts ADB with **root privileges**, which is required to modify system files.
 If the output says “restarting adbd as root,” the command was executed successfully.
@@ -176,11 +177,11 @@ If the output says “restarting adbd as root,” the command was executed succe
 Now enter the next command:
 adb remount
 
-This command allows system files to be overwritten by mounting the /system directory in read-write
+This command allows system files to be overwritten by mounting the ```/system``` directory in read-write
 mode.
 If the output says “remount succeeded,” the operation was successful.
 
-Now we will finally transfer the four required Google Play Store APK files into the **system/priv-app/**
+Now we will finally transfer the four required Google Play Store APK files into the ```system/priv-app/```
 folder of the car.
 
 Enter each of the following commands one by one into the command prompt (CMD) and wait for each to
@@ -188,16 +189,16 @@ complete successfully before proceeding to the next!
 
 
 Now enter the following command to transfer the frst fle:
-adb push GoogleLoginService.apk /system/priv-app/
+```adb push GoogleLoginService.apk /system/priv-app/```
 
 Once this step is complete, proceed with the next fle:
-adb push GoogleServicesFramework.apk /system/priv-app/
+```adb push GoogleServicesFramework.apk /system/priv-app/```
 
 3rd File:
-adb push GmsCore.apk /system/priv-app/
+```adb push GmsCore.apk /system/priv-app/```
 
 And fnally, the last fle:
-adb push Phonesky.apk /system/priv-app/
+```adb push Phonesky.apk /system/priv-app/```
 
 Now that all files have been successfully transferred, we need to **correct the permissions** .
 Enter the following command individually for each file.
@@ -207,13 +208,13 @@ Enter the following command individually for each file.
 If no error message appears and the command runs without output, the action was successful!
 
 1. File:
-adb shell chmod 644 /system/priv-app/GoogleLoginService.apk
+```adb shell chmod 644 /system/priv-app/GoogleLoginService.apk```
 2. File:
-adb shell chmod 644 /system/priv-app/GoogleServicesFramework.apk
+```adb shell chmod 644 /system/priv-app/GoogleServicesFramework.apk```
 3. File:
-adb shell chmod 644 /system/priv-app/GmsCore.apk
+```adb shell chmod 644 /system/priv-app/GmsCore.apk```
 4. File:
-adb shell chmod 644 /system/priv-app/Phonesky.apk
+```adb shell chmod 644 /system/priv-app/Phonesky.apk```
 
 **What does this command do?**
 It sets the permissions to 644 (rw-r–r–), which means:
@@ -223,13 +224,13 @@ Other users (system processes) can only read.
 To finish, we set the file to the correct owner (root) by entering the following command:
 
 1. File:
-adb shell chown root:root /system/priv-app/GoogleLoginService.apk
+```adb shell chown root:root /system/priv-app/GoogleLoginService.apk```
 2. File:
-adb shell chown root:root /system/priv-app/GoogleServicesFramework.apk
+```adb shell chown root:root /system/priv-app/GoogleServicesFramework.apk```
 3. File:
-adb shell chown root:root /system/priv-app/GmsCore.apk
+```adb shell chown root:root /system/priv-app/GmsCore.apk```
 4. File:
-adb shell chown root:root /system/priv-app/Phonesky.apk
+```adb shell chown root:root /system/priv-app/Phonesky.apk```
 
 **What does this command do?**
 It sets the owner to “root”
@@ -247,7 +248,7 @@ This will restart the vehicle’s system so that the installed Google Play servi
 
 After the car has restarted, reconnect it to your Wi-Fi network and (again) run the following command to
 re-establish the ADB connection:
-adb connect IP-ADDRESS:5555
+```adb connect IP-ADDRESS:5555```
 
 If the message “already connected” appears, the connection is still active and everything is fine.
 If not, the connection will be re-established, and you should receive a confirmation (as shown above).
@@ -265,7 +266,7 @@ a unique GSF ID (Google Services Framework ID) from the system and submitting it
 The car has a pre-installed application that allows us to retrieve this unique GSF ID.
 
 To launch this application, enter the following command in the command prompt (CMD):
-adb shell am start -n com.bw.engineermode/.gms.GmsRegisterActivity
+```adb shell am start -n com.bw.engineermode/.gms.GmsRegisterActivity```
 
 This command starts the hidden app on the car, which looks like the following image:
 
@@ -282,7 +283,7 @@ not be shown to you immediately!
 let’s continue with the registration.
 
 Now reopen the command prompt (CMD) on your computer and enter the following command:
-adb shell am start -n com.bw.engineermode/.gms.GmsRegisterActivity
+```adb shell am start -n com.bw.engineermode/.gms.GmsRegisterActivity```
 
 This command restarts the app that displays the GSF ID.
 
@@ -334,7 +335,7 @@ Optionally, you can apply a small optimization in the Developer Options —
 **Attention:** This refers to the Android system settings (green icon), not the car’s settings menu!
 
 These Android settings can be accessed either through the Panels app
-or using the previously mentioned secret code ***#12040416#***, which opens the full app list.
+or using the previously mentioned secret code ```*#12040416#*```, which opens the full app list.
 
 **Here’s how:**
 1. Open the “Settings” app (green icon).
