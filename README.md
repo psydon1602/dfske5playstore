@@ -152,14 +152,14 @@ In that case, check whether the path to platform-tools was properly added to the
 (PATH).
 
 Now we will connect to the car using its IP address.
-Enter the following command in the command prompt (CMD):
+Enter the following command in the command prompt (CMD):<br>
 ```adb connect IP-ADDRESS:5555```
 
 **Example:**
-If your IP address is ```192.168.30.20```, then the command would be:
+If your IP address is ```192.168.30.20```, then the command would be:<br>
 ```adb connect 192.168.30.20:5555```
 
-If the connection is successful, the output should look something like this:
+If the connection is successful, the output should look something like this:<br>
 ```connected to 192.168.30.20:5555```
 
 If an error message appears, check the following:
@@ -189,16 +189,16 @@ Enter each of the following commands one by one into the command prompt (CMD) an
 complete successfully before proceeding to the next!
 
 
-Now enter the following command to transfer the frst fle:
+Now enter the following command to transfer the first file:<br>
 ```adb push GoogleLoginService.apk /system/priv-app/```
 
-Once this step is complete, proceed with the next fle:
+Once this step is complete, proceed with the next file:<br>
 ```adb push GoogleServicesFramework.apk /system/priv-app/```
 
-3rd File:
+3rd File:<br>
 ```adb push GmsCore.apk /system/priv-app/```
 
-And fnally, the last fle:
+And finally, the last file:<br>
 ```adb push Phonesky.apk /system/priv-app/```
 
 Now that all files have been successfully transferred, we need to **correct the permissions** .
@@ -208,13 +208,13 @@ Enter the following command individually for each file.
 (CMD).
 If no error message appears and the command runs without output, the action was successful!
 
-1. File:
+1. File:<br>
 ```adb shell chmod 644 /system/priv-app/GoogleLoginService.apk```
-2. File:
+2. File:<br>
 ```adb shell chmod 644 /system/priv-app/GoogleServicesFramework.apk```
-3. File:
+3. File:<br>
 ```adb shell chmod 644 /system/priv-app/GmsCore.apk```
-4. File:
+4. File:<br>
 ```adb shell chmod 644 /system/priv-app/Phonesky.apk```
 
 **What does this command do?**
@@ -224,13 +224,13 @@ Other users (system processes) can only read.
 
 To finish, we set the file to the correct owner (root) by entering the following command:
 
-1. File:
+1. File:<br>
 ```adb shell chown root:root /system/priv-app/GoogleLoginService.apk```
-2. File:
+2. File:<br>
 ```adb shell chown root:root /system/priv-app/GoogleServicesFramework.apk```
-3. File:
+3. File:<br>
 ```adb shell chown root:root /system/priv-app/GmsCore.apk```
-4. File:
+4. File:<br>
 ```adb shell chown root:root /system/priv-app/Phonesky.apk```
 
 **What does this command do?**
@@ -248,7 +248,7 @@ adb reboot
 This will restart the vehicle’s system so that the installed Google Play services can load correctly.
 
 After the car has restarted, reconnect it to your Wi-Fi network and (again) run the following command to
-re-establish the ADB connection:
+re-establish the ADB connection:<br>
 ```adb connect IP-ADDRESS:5555```
 
 If the message “already connected” appears, the connection is still active and everything is fine.
@@ -266,7 +266,7 @@ a unique GSF ID (Google Services Framework ID) from the system and submitting it
 
 The car has a pre-installed application that allows us to retrieve this unique GSF ID.
 
-To launch this application, enter the following command in the command prompt (CMD):
+To launch this application, enter the following command in the command prompt (CMD):<br>
 ```adb shell am start -n com.bw.engineermode/.gms.GmsRegisterActivity```
 
 This command starts the hidden app on the car, which looks like the following image:
@@ -283,7 +283,7 @@ not be shown to you immediately!
 **Don’t worry!** This message is completely normal because the device has not been registered yet. Now
 let’s continue with the registration.
 
-Now reopen the command prompt (CMD) on your computer and enter the following command:
+Now reopen the command prompt (CMD) on your computer and enter the following command:<br>
 ```adb shell am start -n com.bw.engineermode/.gms.GmsRegisterActivity```
 
 This command restarts the app that displays the GSF ID.
