@@ -1,3 +1,4 @@
+![BANNER](https://raw.githubusercontent.com/psydon1602/dfske5playstore/refs/heads/main/BANNER-EN.png)
 # **Tutorial for Installing Google Play** **on DFSK E5 / Fengon 600**
 
 **Before we get started with the actual installation of the Google Play Store in the**
