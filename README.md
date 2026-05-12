@@ -358,6 +358,4 @@ This will result in faster and more responsive system performance.
 
 Have fun!
 
-Kristijan Barisic
-
 
